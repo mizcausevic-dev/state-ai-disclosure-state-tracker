@@ -1,0 +1,243 @@
+{
+  "record_version": "0.1",
+  "record_id": "vendory-tutorai-3.4-2026-q3-multistate",
+  "issued_at": "2026-09-30T16:00:00Z",
+  "product": {
+    "name": "VendorY TutorAI",
+    "version": "3.4",
+    "vendor": {
+      "name": "VendorY Education, Inc.",
+      "url": "https://vendory.example/"
+    },
+    "intended_use": "AI-assisted personalized tutoring for K-12 mathematics in standards-aligned curriculum sequences",
+    "audience_grade_band": "6-12",
+    "under_13_users": true
+  },
+  "states_in_scope": [
+    "IL",
+    "CA",
+    "TX"
+  ],
+  "per_state_status": [
+    {
+      "state_code": "IL",
+      "statute_status": {
+        "statute_name": "Illinois SOPPA (Student Online Personal Protection Act)",
+        "citation": "105 ILCS 85/",
+        "effective_date": "2017-08-23",
+        "last_amendment_date": "2024-01-01",
+        "statute_url": "https://www.ilga.gov/legislation/ilcs/ilcs5.asp?ActID=3735",
+        "covers": [
+          "student-data-privacy",
+          "vendor-procurement-controls",
+          "no-sale-or-targeted-ad",
+          "breach-notification",
+          "deletion-rights"
+        ]
+      },
+      "current_status": "disclosure-published",
+      "statute_specific_fields_documented": [
+        {
+          "field_id": "soppa-vendor-contract-addendum",
+          "value_description": "Springfield Public Schools ↔ VendorY SOPPA addendum executed 2026-08-12",
+          "evidence_uri": "https://springfield.k12.example/.well-known/contracts/vendory-soppa-addendum-2026.pdf"
+        },
+        {
+          "field_id": "soppa-no-sale-attestation",
+          "value_description": "VendorY attests no sale of student data + no targeted ads per 105 ILCS 85/5",
+          "evidence_uri": "https://vendory.example/.well-known/attestations/soppa-no-sale-2026.json"
+        },
+        {
+          "field_id": "soppa-breach-notification-process-cited",
+          "value_description": "Springfield's IL SOPPA + IL PIPA breach-notification process documented",
+          "evidence_uri": "https://springfield.k12.example/.well-known/policies/breach-notification-il.md"
+        },
+        {
+          "field_id": "soppa-deletion-rights-honored",
+          "value_description": "Parental deletion request processed within 30-day SOPPA window",
+          "evidence_uri": "https://vendory.example/.well-known/policies/data-deletion.md"
+        }
+      ],
+      "annual_attestation_due": "2027-08-23",
+      "last_annual_attestation": "2026-08-12T14:00:00Z",
+      "state_ed_contact_uri": "https://www.isbe.net/Pages/Student-Privacy.aspx"
+    },
+    {
+      "state_code": "CA",
+      "statute_status": {
+        "statute_name": "California AB 1584 (Student Online Personal Information Protection Act) + AB 2876 (AI in Schools disclosure)",
+        "citation": "Cal. Ed. Code §49073.1 + AB 2876 (2024)",
+        "effective_date": "2014-09-25",
+        "last_amendment_date": "2025-01-01",
+        "statute_url": "https://leginfo.legislature.ca.gov/faces/codes_displayText.xhtml?lawCode=EDC&division=4.&title=2.&part=27.&chapter=2.5.",
+        "covers": [
+          "student-data-privacy",
+          "ai-specific-disclosure",
+          "bias-disclosure",
+          "vendor-procurement-controls",
+          "no-sale-or-targeted-ad",
+          "facial-recognition-restriction"
+        ]
+      },
+      "current_status": "disclosure-published-with-conditions",
+      "statute_specific_fields_documented": [
+        {
+          "field_id": "ab1584-contract-required-clauses",
+          "value_description": "Mountain View School District ↔ VendorY AB 1584-conforming contract executed 2026-07-28",
+          "evidence_uri": "https://mvsd.example/.well-known/contracts/vendory-ab1584-2026.pdf"
+        },
+        {
+          "field_id": "ab2876-ai-disclosure-published",
+          "value_description": "VendorY published AI System Disclosure per AB 2876 §1 — intended use, training-data summary, risk-tier, bias-coverage bundle referenced",
+          "evidence_uri": "https://vendory.example/.well-known/state-disclosures/ca/ab2876-tutorai-3.4.json"
+        },
+        {
+          "field_id": "ab2876-bias-disclosure",
+          "value_description": "Bias-coverage bundle published per AB 2876 §2; EL entering+emerging gap documented + remediation pending v3.5 December 2026",
+          "evidence_uri": "https://vendory.example/.well-known/bundles/tutorai-3.4-bias-coverage.json"
+        },
+        {
+          "field_id": "ab2876-bias-remediation-condition",
+          "value_description": "Conditional approval — VendorY's bias gap remediation due 2026-12-15. State ED's review-on-remediation-receipt requested.",
+          "evidence_uri": "https://mvsd.example/.well-known/decisions/MVSD-DEC-2026-CA-BIAS-COND-0019.json"
+        }
+      ],
+      "annual_attestation_due": "2027-07-28",
+      "last_annual_attestation": "2026-07-28T16:00:00Z",
+      "state_ed_contact_uri": "https://www.cde.ca.gov/ds/sp/privacy/"
+    },
+    {
+      "state_code": "TX",
+      "statute_status": {
+        "statute_name": "Texas HB 18 (Securing Children Online through Parental Empowerment Act, 'SCOPE') + TX ED Code Chapter 32 student-data-privacy provisions",
+        "citation": "Tex. Bus. & Com. Code Ch. 509 + Tex. Educ. Code §32.151",
+        "effective_date": "2024-09-01",
+        "last_amendment_date": "2025-09-01",
+        "statute_url": "https://capitol.texas.gov/tlodocs/88R/billtext/html/HB00018F.HTM",
+        "covers": [
+          "student-data-privacy",
+          "parental-rights-augmentation",
+          "deletion-rights",
+          "no-sale-or-targeted-ad",
+          "social-media-companion"
+        ]
+      },
+      "current_status": "submission-pending",
+      "statute_specific_fields_documented": [
+        {
+          "field_id": "scope-parental-control-mechanism",
+          "value_description": "VendorY parent-portal mechanism for under-18 student access oversight per HB 18 §509.0512",
+          "evidence_uri": "https://vendory.example/.well-known/state-disclosures/tx/scope-parent-controls.json"
+        },
+        {
+          "field_id": "scope-tracking-purposes-restricted",
+          "value_description": "VendorY attests no behavioral advertising, profiling for marketing, or collection of biometric / precise geolocation data per HB 18 §509.057",
+          "evidence_uri": "https://vendory.example/.well-known/attestations/scope-no-targeted-ad-2026.json"
+        }
+      ],
+      "annual_attestation_due": "2027-09-01",
+      "state_ed_contact_uri": "https://tea.texas.gov/about-tea/government-relations-and-legal/state-funding/student-records-and-privacy"
+    }
+  ],
+  "transitions": [
+    {
+      "from_state": "deployment-planning",
+      "to_state": "submission-pending",
+      "transition_at": "2025-12-15T00:00:00Z",
+      "trigger": {
+        "kind": "deployment-initiated",
+        "state_code": "IL",
+        "description": "Springfield Public Schools (Springfield, IL) initiated deployment planning for VendorY TutorAI v3.4."
+      }
+    },
+    {
+      "from_state": "submission-pending",
+      "to_state": "submission-under-state-review",
+      "transition_at": "2026-06-20T00:00:00Z",
+      "trigger": {
+        "kind": "state-ed-review-request",
+        "state_code": "IL",
+        "description": "Illinois SBE student-privacy office acknowledged SOPPA addendum submission."
+      }
+    },
+    {
+      "from_state": "submission-under-state-review",
+      "to_state": "disclosure-published",
+      "transition_at": "2026-08-12T14:00:00Z",
+      "trigger": {
+        "kind": "state-ed-decision-issued",
+        "state_code": "IL",
+        "description": "Illinois SOPPA addendum countersigned + on file. Disclosure published.",
+        "supporting_doc_url": "https://springfield.k12.example/.well-known/contracts/vendory-soppa-addendum-2026.pdf"
+      }
+    },
+    {
+      "from_state": "deployment-planning",
+      "to_state": "submission-pending",
+      "transition_at": "2026-03-01T00:00:00Z",
+      "trigger": {
+        "kind": "deployment-initiated",
+        "state_code": "CA",
+        "description": "Mountain View School District (Mountain View, CA) initiated deployment planning for VendorY TutorAI v3.4."
+      }
+    },
+    {
+      "from_state": "submission-pending",
+      "to_state": "submission-under-state-review",
+      "transition_at": "2026-06-15T00:00:00Z",
+      "trigger": {
+        "kind": "state-ed-review-request",
+        "state_code": "CA",
+        "description": "California Dept of Education student-privacy office acknowledged AB 1584 + AB 2876 disclosure submission."
+      }
+    },
+    {
+      "from_state": "submission-under-state-review",
+      "to_state": "disclosure-published-with-conditions",
+      "transition_at": "2026-07-28T16:00:00Z",
+      "trigger": {
+        "kind": "state-ed-decision-issued",
+        "state_code": "CA",
+        "description": "California Dept of Education accepted AB 2876 disclosure with condition: bias-coverage remediation due 2026-12-15.",
+        "supporting_doc_url": "https://vendory.example/.well-known/state-disclosures/ca/ab2876-tutorai-3.4.json"
+      }
+    },
+    {
+      "from_state": "deployment-planning",
+      "to_state": "submission-pending",
+      "transition_at": "2026-08-01T00:00:00Z",
+      "trigger": {
+        "kind": "deployment-initiated",
+        "state_code": "TX",
+        "description": "Austin Independent School District (Austin, TX) initiated deployment planning for VendorY TutorAI v3.4. HB 18 (SCOPE) submission package compiled."
+      }
+    },
+    {
+      "from_state": "submission-pending",
+      "to_state": "submission-pending",
+      "transition_at": "2026-09-15T00:00:00Z",
+      "trigger": {
+        "kind": "state-statute-amended",
+        "state_code": "TX",
+        "description": "Texas Legislature amended HB 18 implementing rules per 2025-09 effective date. VendorY's submission package re-compiled to address new biometric-data restrictions."
+      }
+    }
+  ],
+  "federal_floor_compliance": {
+    "ferpa_decision_card_uri": "https://springfield.k12.example/.well-known/decisions/SPRINGFIELD-DEC-2026-EDTECH-0014.json",
+    "coppa_decision_card_uri": "https://springfield.k12.example/.well-known/decisions/SPRINGFIELD-DEC-2026-EDTECH-0014.json"
+  },
+  "publisher": {
+    "name": "VendorY Education, Inc. — Public Sector + Regulatory Affairs",
+    "url": "https://vendory.example/regulatory",
+    "role": "vendor",
+    "contact": "regulatory@vendory.example"
+  },
+  "signature": {
+    "algorithm": "ed25519",
+    "signer_key_uri": "https://vendory.example/.well-known/keys/state-disclosure-signer.json#k-2026q3",
+    "signature_b64": "ILLUSTRATIVE_PLACEHOLDER_SIGNATURE_FOR_SCHEMA_DOCUMENTATION"
+  },
+  "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+  "hash": "22079c3626b41a77c6ab0d403e2dee6f75900fb8c866773d7d75b3549e8791fa"
+}

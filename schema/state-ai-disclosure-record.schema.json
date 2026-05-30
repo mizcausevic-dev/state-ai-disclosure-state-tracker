@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/mizcausevic-dev/state-ai-disclosure-state-tracker/blob/main/schema/state-ai-disclosure-record.schema.json",
+  "title": "State AI Disclosure Record",
+  "description": "Hash-chained append-only record of an EdTech product's compliance posture across the 50 state student-data-privacy + state-AI-policy regimes. Names the per-state statutes, the field requirements each statute adds beyond the FERPA + COPPA federal floor, the product's per-state disclosure status, and the lifecycle transitions when a state passes a new statute or refreshes an existing one. Bridges the heterogeneous state-policy landscape to the Kinetic Gain Protocol Suite audit-stream spine so a vendor, an LEA, or a state ED reads one verifiable record across all 50 states.",
+  "type": "object",
+  "required": [
+    "record_version",
+    "record_id",
+    "issued_at",
+    "product",
+    "states_in_scope",
+    "per_state_status",
+    "transitions",
+    "prev_hash",
+    "hash"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "record_version":      {"type": "string", "const": "0.1"},
+    "record_id":           {"type": "string", "minLength": 1},
+    "issued_at":           {"type": "string", "format": "date-time"},
+    "product":             {"$ref": "#/$defs/Product"},
+    "states_in_scope":     {"type": "array", "items": {"$ref": "#/$defs/StateCode"}, "minItems": 1, "description": "List of US-state codes the product is currently deployed in OR planned for deployment within the next 12 months"},
+    "per_state_status":    {"type": "array", "items": {"$ref": "#/$defs/PerStateStatus"}, "minItems": 1},
+    "transitions":         {"type": "array", "items": {"$ref": "#/$defs/Transition"}, "minItems": 1},
+    "federal_floor_compliance": {
+      "type": "object",
+      "description": "Snapshot of the product's federal-floor disclosure status — referenced by per-state status entries that build atop the federal floor.",
+      "additionalProperties": false,
+      "properties": {
+        "ferpa_decision_card_uri":     {"type": "string", "format": "uri"},
+        "coppa_decision_card_uri":     {"type": "string", "format": "uri"},
+        "section_504_attestation_uri": {"type": "string", "format": "uri"},
+        "idea_attestation_uri":        {"type": "string", "format": "uri"}
+      }
+    },
+    "publisher":           {"$ref": "#/$defs/Publisher"},
+    "signature":           {"$ref": "#/$defs/Signature"},
+    "prev_hash":           {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+    "hash":                {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "StateCode": {
+      "type": "string",
+      "enum": ["AL","AK","AZ","AR","CA","CO","CT","DE","FL","GA","HI","ID","IL","IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV","NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX","UT","VT","VA","WA","WV","WI","WY","DC","PR"]
+    },
+    "Product": {
+      "type": "object",
+      "required": ["name", "vendor", "intended_use"],
+      "additionalProperties": false,
+      "properties": {
+        "name":               {"type": "string", "minLength": 1},
+        "version":            {"type": "string"},
+        "vendor": {
+          "type": "object",
+          "required": ["name"],
+          "properties": {
+            "name": {"type": "string", "minLength": 1},
+            "url":  {"type": "string", "format": "uri"}
+          }
+        },
+        "intended_use":       {"type": "string", "minLength": 1},
+        "audience_grade_band":{"type": "string", "enum": ["K-2", "3-5", "6-8", "9-12", "K-12", "postsecondary", "K-12-and-postsecondary"]},
+        "under_13_users":     {"type": "boolean"}
+      }
+    },
+    "PerStateStatus": {
+      "type": "object",
+      "required": ["state_code", "statute_status", "current_status"],
+      "additionalProperties": false,
+      "properties": {
+        "state_code":     {"$ref": "#/$defs/StateCode"},
+        "statute_status": {"$ref": "#/$defs/StatuteStatus"},
+        "current_status": {
+          "type": "string",
+          "enum": [
+            "not-deployed",
+            "deployment-planning",
+            "submission-pending",
+            "submission-under-state-review",
+            "disclosure-published",
+            "disclosure-published-with-conditions",
+            "non-conformant-remediation-pending",
+            "withdrawn-from-state",
+            "exempt"
+          ]
+        },
+        "statute_specific_fields_documented": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["field_id", "value_description"],
+            "additionalProperties": false,
+            "properties": {
+              "field_id":          {"type": "string", "description": "Field identifier in the statute (e.g. 'bias-disclosure-required' per CA AB 2876)"},
+              "value_description": {"type": "string"},
+              "evidence_uri":      {"type": "string", "format": "uri"}
+            }
+          }
+        },
+        "annual_attestation_due":   {"type": "string", "format": "date"},
+        "last_annual_attestation":  {"type": "string", "format": "date-time"},
+        "state_ed_contact_uri":     {"type": "string", "format": "uri"}
+      }
+    },
+    "StatuteStatus": {
+      "type": "object",
+      "required": ["statute_name", "citation"],
+      "additionalProperties": false,
+      "properties": {
+        "statute_name":        {"type": "string", "minLength": 1, "description": "Common name (e.g. 'Illinois SOPPA', 'California AB 1584', 'NY ED Law 2-d')"},
+        "citation":            {"type": "string", "minLength": 1, "description": "Formal citation (e.g. '105 ILCS 85/' for IL SOPPA)"},
+        "effective_date":      {"type": "string", "format": "date"},
+        "last_amendment_date": {"type": "string", "format": "date"},
+        "statute_url":         {"type": "string", "format": "uri"},
+        "covers": {
+          "type": "array",
+          "items": {"type": "string", "enum": ["student-data-privacy", "ai-specific-disclosure", "bias-disclosure", "biometric-data", "directory-info-augmentation", "breach-notification", "vendor-procurement-controls", "parental-rights-augmentation", "deletion-rights", "no-sale-or-targeted-ad", "facial-recognition-restriction", "social-media-companion"]}
+        }
+      }
+    },
+    "Transition": {
+      "type": "object",
+      "required": ["from_state", "to_state", "transition_at", "trigger"],
+      "additionalProperties": false,
+      "properties": {
+        "from_state":   {"type": "string", "description": "Prior current_status value (per a specific state, named in trigger.state_code)"},
+        "to_state":     {"type": "string"},
+        "transition_at":{"type": "string", "format": "date-time"},
+        "trigger": {
+          "type": "object",
+          "required": ["kind", "description"],
+          "additionalProperties": false,
+          "properties": {
+            "kind":               {"type": "string", "enum": ["state-statute-enacted", "state-statute-amended", "deployment-initiated", "state-ed-review-request", "state-ed-review-response", "state-ed-decision-issued", "annual-attestation-filed", "non-conformance-detected", "withdrawal-decision", "exemption-granted"]},
+            "state_code":         {"$ref": "#/$defs/StateCode", "description": "Required — names which state's status changed"},
+            "description":        {"type": "string", "minLength": 1},
+            "supporting_doc_url": {"type": "string", "format": "uri"}
+          }
+        }
+      }
+    },
+    "Publisher": {
+      "type": "object",
+      "required": ["name"],
+      "additionalProperties": false,
+      "properties": {
+        "name":     {"type": "string", "minLength": 1},
+        "url":      {"type": "string", "format": "uri"},
+        "role":     {"type": "string", "enum": ["manufacturer", "vendor", "lea", "state-ed", "consortium", "data-protection-officer"]},
+        "contact":  {"type": "string"}
+      }
+    },
+    "Signature": {
+      "type": "object",
+      "required": ["algorithm", "signer_key_uri", "signature_b64"],
+      "additionalProperties": false,
+      "properties": {
+        "algorithm":     {"type": "string", "const": "ed25519"},
+        "signer_key_uri":{"type": "string", "format": "uri"},
+        "signature_b64": {"type": "string"}
+      }
+    }
+  }
+}

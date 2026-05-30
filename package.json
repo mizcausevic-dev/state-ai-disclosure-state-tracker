@@ -1,0 +1,20 @@
+{
+  "name": "state-ai-disclosure-state-tracker",
+  "version": "0.1.0",
+  "description": "Hash-chained per-state lifecycle record schema + reference verifier for EdTech AI products navigating the 50 state student-data-privacy + state-AI-policy regimes. Part of the Kinetic Gain Protocol Suite.",
+  "license": "MIT",
+  "author": "Miz Causevic",
+  "type": "module",
+  "private": true,
+  "bin": {
+    "state-disclosure-verify": "./src/verify.mjs"
+  },
+  "scripts": {
+    "verify":         "node src/verify.mjs",
+    "build-examples": "node src/build-examples.mjs",
+    "verify-all":     "for f in examples/*.json; do node src/verify.mjs \"$f\" || exit 1; done"
+  },
+  "repository": {"type": "git", "url": "https://github.com/mizcausevic-dev/state-ai-disclosure-state-tracker"},
+  "homepage": "https://suite.kineticgain.com",
+  "keywords": ["ai-governance", "edtech", "ferpa", "coppa", "state-law", "soppa", "ab-2876", "hb-18", "student-privacy", "kinetic-gain-protocol-suite"]
+}
